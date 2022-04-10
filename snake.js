@@ -1,5 +1,6 @@
 let canvas = document.getElementById('game');
 let context = canvas.getContext('2d');
+let scorediv = document.getElementById ('score')
 let grid = 16;
 let snake = {
   x: 160,
@@ -25,6 +26,7 @@ img.height = grid;
 img.width = grid;
 img.src = "apple.svg";
 let score = 0;
+scorediv.innerText = score
 let directionQueue = [];
 
 function getRandomInt(min, max) {
@@ -39,6 +41,7 @@ function resetGame(){
   snake.cells = []
   snake.maxCells =  4
   score = 0
+  scorediv.innerText = score
   apple.x = 320
   apple.y = 320
 }
@@ -58,20 +61,12 @@ function handleWallHit() {
 }
 
 snake.canSwitchDirection = function(key) {
-  if ( 
+  return ( 
     ((key === "ArrowUp" || key === "ArrowDown") && snake.dy === 0) ||
     ((key === "ArrowLeft" || key === "ArrowRight") && snake.dx === 0 )
     )
-    {
-      return true
-    }
-    {
-      return false
-    }
   }
-
-
-
+  
 snake.move = function() {
   snake.x += snake.dx
   snake.y += snake.dy
@@ -97,6 +92,7 @@ snake.draw = function() {
     // snake ate apple
     if (cell.x === apple.x && cell.y === apple.y) {
       score++;
+      scorediv.innerText = score
       snake.maxCells++;
       apple.x = getRandomInt(0, 32) * grid;
       apple.y = getRandomInt(0, 32) * grid;
@@ -115,7 +111,7 @@ snake.draw = function() {
 function loop() {
   requestAnimationFrame(loop);
   // slow game loop to 15 fps instead of 60 - 60/15 = 4
-  if (++count < 4) {
+  if (++count < 8) {
     return;
   }
   count = 0;
@@ -131,10 +127,6 @@ function loop() {
   context.drawImage(img, apple.x, apple.y, grid, grid);
   
   snake.draw();
- 
-  context.font="20px Arial"
-  context.fillStyle = 'white';
-  context.fillText(score, 30, 30);
 }
 
 document.addEventListener('keydown', function(e) {

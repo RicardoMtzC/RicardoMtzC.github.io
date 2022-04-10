@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Snake Game</title>
   <style>
   html, body {
     height: 100%;
@@ -25,9 +25,10 @@
    } 
    .linkDiv {
      height: 100%;
-     width: 20%;
+     width: 10%;
      border-right: 1px solid white;
      padding: 0px 20px;
+     text-align: center;
    }
      .linkHeading {
       text-align: center;
@@ -38,19 +39,26 @@
      display: block;
 
    }
-
+  .scoreNum {
+    display: flex;
+    color: white;
+    width: 500px;
+    font-size: 25px;  
+  }
   canvas {
-    border: 1px solid white;
+    border: 2px solid white;
+    background: black;    
   }
   </style>
 </head>
 <body>
   <div class='linkDiv'>
     <h1 class='linkHeading'>Links</h1>
-    <a href='https://www.google.com/doodles' class="a">Google Doodles</a>
+    <a href='https://softwoof.com' class="a">Softwoof</a>
   </div>
   <div class='gameDiv'>
-    <h1>Snake Game</h1>
+    <h1>Snake Game</h1> 
+    <div class="scoreNum">Score: &nbsp; <div id="score">0</div></div>   
     <canvas width="512" height="512" id="game"></canvas>
   </div>
 
